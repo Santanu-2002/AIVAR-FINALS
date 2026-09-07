@@ -228,8 +228,8 @@ app.use((err, _req, res, _next) => {
 
 const port = Number(process.env.PORT || 5000);
 
-app.listen(port, () => {
+app.listen(port, "0.0.0.0", () => {
   console.log(
-    `Autonomous Test Orchestrator API listening on http://localhost:${port}`
+    `Autonomous Test Orchestrator API listening on port ${port}`
   );
 });
