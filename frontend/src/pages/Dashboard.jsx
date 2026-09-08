@@ -92,17 +92,52 @@ export default function Dashboard() {
 
         {report && (
           <div className="card">
-            <h2 className="page__heading">Quality report</h2>
-            <p><strong>Scenarios:</strong> {report.summary?.scenarios ?? "—"}</p>
-            <p><strong>Tests run:</strong> {report.summary?.tests ?? "—"}</p>
-            <p><strong>Passed:</strong> {report.summary?.passed ?? "—"}</p>
-            <p><strong>Failed:</strong> {report.summary?.failed ?? "—"}</p>
-            <p><strong>Coverage score:</strong> {report.summary?.coverageScore ?? "—"}</p>
-            <p><strong>Healer actions:</strong> {report.healerActions?.length ?? "—"}</p>
-            <p><strong>Coverage gaps:</strong> {report.coverageGaps?.length ? report.coverageGaps.join(", ") : "None"}</p>
-            <p><strong>Untested flow risk:</strong> {report.untestedFlowRisk ?? "—"}</p>
+            <h2 className="card__title">Quality report</h2>
 
-            <h3 className="page__heading">Scenarios covered</h3>
+            <p className="report-stat">
+              <strong>Scenarios:</strong>
+              <span>{report.summary?.scenarios ?? "—"}</span>
+            </p>
+
+            <p className="report-stat">
+              <strong>Tests run:</strong>
+              <span>{report.summary?.tests ?? "—"}</span>
+            </p>
+
+            <p className="report-stat">
+              <strong>Passed:</strong>
+              <span>{report.summary?.passed ?? "—"}</span>
+            </p>
+
+            <p className="report-stat">
+              <strong>Failed:</strong>
+              <span>{report.summary?.failed ?? "—"}</span>
+            </p>
+
+            <p className="report-stat">
+              <strong>Coverage score:</strong>
+              <span>{report.summary?.coverageScore ?? "—"}</span>
+            </p>
+
+            <p className="report-stat">
+              <strong>Healer actions:</strong>
+              <span>{report.healerActions?.length ?? "—"}</span>
+            </p>
+
+            <p className="report-stat">
+              <strong>Coverage gaps:</strong>
+              <span>
+                {report.coverageGaps?.length
+                  ? report.coverageGaps.join(", ")
+                  : "None"}
+              </span>
+            </p>
+
+            <p className="report-stat">
+              <strong>Untested flow risk:</strong>
+              <span>{report.untestedFlowRisk ?? "—"}</span>
+            </p>
+            <h3 className="card__subtitle">Scenarios covered</h3>
             <div className="result-list">
               {report.scenariosCovered?.map((scenario) => (
                 <div className="result-row" key={scenario.id}>
@@ -115,16 +150,32 @@ export default function Dashboard() {
         )}
 
         {tests?.tests?.length > 0 && (
-          <div className="card">
-            <h2 className="page__heading">Generated tests</h2>
-            {tests.tests.map((test) => (
-              <div key={test.id}>
-                <p className="result-row__name">{test.name}</p>
-                <pre className="code-block">{test.code}</pre>
+  <div className="card generated-tests-card">
+    <h2 className="card__title">Generated tests</h2>
+
+    <div className="generated-tests">
+      {tests.tests.map((test, index) => (
+              <div className="generated-test" key={test.id || index}>
+
+                <div className="generated-test__header">
+                  <span className="generated-test__number">
+                    Test {index + 1}
+                  </span>
+
+                  <span className="generated-test__name">
+                    {test.name}
+                  </span>
+                </div>
+
+                <pre className="code-block">
+                  <code>{test.code}</code>
+                </pre>
+
               </div>
             ))}
           </div>
-        )}
+        </div>
+      )}
 
         {run.status !== "completed" && run.status !== "failed" && (
           <p className="page__subheading">Running... this page updates automatically.</p>
