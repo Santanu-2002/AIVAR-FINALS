@@ -31,6 +31,13 @@ app.use(
   })
 );
 
+app.get("/health", (req, res) => {
+  res.status(200).json({
+    status: "ok",
+    message: "Server is running",
+  });
+});
+
 app.use("/api/auth", loginSignupRouter);
 app.use("/api/userHistory", getAddHistoryRouter );
 const upload = multer({
