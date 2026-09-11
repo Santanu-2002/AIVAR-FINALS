@@ -11,6 +11,7 @@ import { Orchestrator } from "./orchestrator.js";
 import connectDB from "./config/db.js";
 
 import loginSignupRouter from "./loginSignup.js";
+import getAddHistoryRouter from './userHistory.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
@@ -31,7 +32,7 @@ app.use(
 );
 
 app.use("/api/auth", loginSignupRouter);
-
+app.use("/api/userHistory", getAddHistoryRouter );
 const upload = multer({
   dest: path.join(RUNS_DIR, "uploads"),
 });
@@ -228,8 +229,8 @@ app.use((err, _req, res, _next) => {
 
 const port = Number(process.env.PORT || 5000);
 
-app.listen(port, () => {
+app.listen(port, "0.0.0.0", () => {
   console.log(
-    `Autonomous Test Orchestrator API listening on http://localhost:${port}`
+    `Autonomous Test Orchestrator API listening on port ${port}`
   );
 });
