@@ -20,7 +20,7 @@ const addUserHistory = async (req, res)=>{
             });
         }
 
-        const savedHistory = new UserHistory(userId, url);
+        const savedHistory = new UserHistory({userId, url});
 
         await savedHistory.save();
 
@@ -72,8 +72,8 @@ const deleteHistory = async(req, res)=>{
 
     }
 }
-module.exports = {addUserHistory};
-module.exports = {fetchUserHistory};
+// export default {addUserHistory};
+// module.exports = {fetchUserHistory};
 
 
 router.post('/saved-history', userAuthMiddleware, addUserHistory);

@@ -1,4 +1,4 @@
-const jwt = require("jsonwebtoken");
+import jwt from "jsonwebtoken";
 
 const userAuthMiddleware = async(req,res, next)=>{
     try{
