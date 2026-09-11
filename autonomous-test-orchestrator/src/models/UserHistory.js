@@ -1,5 +1,5 @@
 import mongoose, { mongo } from "mongoose";
-import userAuthMiddleware from "../middlewares/userAuthMiddleware";
+
 const userHistorySchema = mongoose.Schema(
     {
         userId:{
